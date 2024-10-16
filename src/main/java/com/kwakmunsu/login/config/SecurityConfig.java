@@ -22,7 +22,7 @@ public class SecurityConfig {
         // 인가 작업: 아래 경로에 대한 권한 설정
         // authorizeHttpRequests = HTTP 요청에 대한 인가(Authorization)**를 설정하는 메서드
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/login").permitAll()
+                .requestMatchers("/", "/login","/join","/gjoinProc").permitAll()
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .requestMatchers("/my/**").hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated()   //그 외 경로
