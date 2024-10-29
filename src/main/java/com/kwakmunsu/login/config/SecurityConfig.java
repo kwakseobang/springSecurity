@@ -40,8 +40,16 @@ public class SecurityConfig {
 
         // csrf라는 걸 security가 자동으로 해주는데 이러면 로그인할때 csrf 토큰도 같이 보내줘야되는데 지금은 사용안하는 잠시 비활성
         http.csrf(auth -> auth.disable());
+        // 다중 로그인 설정
+        http
+                .sessionManagement((auth) -> auth
+                        .maximumSessions(1) // 하나의 아이디에 대한 다중 로그인 허용 개수
+                        .maxSessionsPreventsLogin(true)); // 초과시 새로운 로그인 차단
 
-
+        // 세션 고정 보호
+        http
+                .sessionManagement((auth) -> auth
+                        .sessionFixation().changeSessionId());
         return http.build();
     }
 }
