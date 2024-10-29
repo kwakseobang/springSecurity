@@ -25,8 +25,13 @@ public class JoinController {
     public String joinProcess(JoinDTO joinDTO ) {
 
         log.info(joinDTO);
+        try {
+            joinService.signUp(joinDTO);
+            return "redirect:/login";
+        } catch (Exception e) {
+            log.info("회원가입 실패: " + e.getMessage());
+            return "redirect:/join";
 
-        joinService.signUp(joinDTO);
-        return "redirect:/login";
+        }
     }
 }

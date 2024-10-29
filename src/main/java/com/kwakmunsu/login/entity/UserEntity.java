@@ -1,10 +1,7 @@
 package com.kwakmunsu.login.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,9 +12,10 @@ import lombok.Setter;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //자동 증가
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //자동
     private int id;
 
+    @Column(unique = true) // 중복 방지. 유일한 값
     private  String username;
     private String password;
 

@@ -15,13 +15,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class JoinService {
 
-    final private UserRepository userRepository;
+    private  final UserRepository userRepository;
 
-    final private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void signUp(JoinDTO joinDTO) {
+    public void signUp(JoinDTO joinDTO) throws  Exception{
 
-        //db에 동일한 username을 가진 회원이 존재하는지 검증 로직 구현
+        boolean isUser = userRepository.existsByUsername(joinDTO.getUsername());
+
+        if (isUser) {
+            throw new Exception("사용자가 이미 존재합니다.");
+        }
 
         //DTO -> entity로 전환
         UserEntity data = new UserEntity();

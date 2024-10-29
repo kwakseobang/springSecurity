@@ -22,7 +22,7 @@ public class SecurityConfig {
         // 인가 작업: 아래 경로에 대한 권한 설정
         // authorizeHttpRequests = HTTP 요청에 대한 인가(Authorization)**를 설정하는 메서드
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/login","/join","/gjoinProc").permitAll()
+                .requestMatchers("/", "/login","/join","/joinProc").permitAll() //모두 접근 허용
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .requestMatchers("/my/**").hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated()   //그 외 경로
@@ -37,6 +37,7 @@ public class SecurityConfig {
                 .loginProcessingUrl("/loginProc") // 로그인 폼에서 처리된 데이터를 해당 경로로 보냄 즉 로그인 처리 요청 경로
                 .permitAll()
         );
+
         // csrf라는 걸 security가 자동으로 해주는데 이러면 로그인할때 csrf 토큰도 같이 보내줘야되는데 지금은 사용안하는 잠시 비활성
         http.csrf(auth -> auth.disable());
 
