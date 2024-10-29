@@ -33,7 +33,7 @@ public class JoinService {
         data.setUsername(joinDTO.getUsername());
         //비밀번호는 암호화 해야됨
         data.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword()));
-        data.setRole(Role.USER.name());
+        data.setRole("ROLE_ADMIN");
 
         userRepository.save(data);
     }

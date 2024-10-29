@@ -22,7 +22,7 @@ public class JoinController {
     }
 
     @PostMapping("/joinProc")
-    public String joinProcess(JoinDTO joinDTO ) {
+    public String joinProcess(JoinDTO joinDTO) {
 
         log.info(joinDTO);
         try {
