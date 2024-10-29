@@ -39,7 +39,7 @@ public class SecurityConfig {
         );
 
         // csrf라는 걸 security가 자동으로 해주는데 이러면 로그인할때 csrf 토큰도 같이 보내줘야되는데 지금은 사용안하는 잠시 비활성
-        http.csrf(auth -> auth.disable());
+//        http.csrf(auth -> auth.disable());
         // 다중 로그인 설정
         http
                 .sessionManagement((auth) -> auth
@@ -50,6 +50,11 @@ public class SecurityConfig {
         http
                 .sessionManagement((auth) -> auth
                         .sessionFixation().changeSessionId());
+
+
+        http
+                .logout((auth) -> auth.logoutUrl("/logout")
+                        .logoutSuccessUrl("/"));
         return http.build();
     }
 }
